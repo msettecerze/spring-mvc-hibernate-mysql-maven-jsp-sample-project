@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gt.webapp.server.dao.EmployeeDAO;
 import com.gt.webapp.server.entity.Employee;
@@ -35,15 +36,13 @@ public class EmployeeController {
 	}
 
 	@RequestMapping( value = "/employee/add/process" )
-	public ModelAndView addingEmployee( @ModelAttribute Employee employee ) {
+	public String addingEmployee( @ModelAttribute Employee employee, final RedirectAttributes redirectAttributes ) {
 		Long id= employeeDao.save( employee );
-		String message = "Employee saved successfully added.";
-
-		// TODO: disable duplicate form submit
-
-		ModelAndView modelAndView = new ModelAndView( "employee/employee-main" );
-		modelAndView.addObject( "message", message );
-		return modelAndView;
+		String message = "Employee saved successfully added. id = " + id;
+ 
+		redirectAttributes.addFlashAttribute( "message", message );
+		
+		return "redirect:/employee/list" ;
 	}
 
 	@RequestMapping( value = "/employee/list" )
@@ -81,19 +80,18 @@ public class EmployeeController {
 	 * save after edit
 	 */
 	@RequestMapping( value = "/employee/edit/process", method = RequestMethod.POST )
-	public ModelAndView edditingEmployee( @ModelAttribute Employee employee ) {
+	public String edditingEmployee( @ModelAttribute Employee employee ,final RedirectAttributes redirectAttributes ) {
 
 		employeeDao.merge( employee );
 
 		String message = "Employee was successfully edited.";
-		ModelAndView modelAndView = new ModelAndView( "redirect:/employee/list" );
-		modelAndView.addObject( "message", message );
-
-		return modelAndView;
+		redirectAttributes.addFlashAttribute( "message", message );
+		
+		return "redirect:/employee/list" ;
 	}
 
 	@RequestMapping( value = "/employee/delete/{id}", method = RequestMethod.GET )
-	public ModelAndView deleteEmployee( @PathVariable Long id ) {
+	public String deleteEmployee( @PathVariable Long id, final RedirectAttributes redirectAttributes) {
 		String message = "";
 
 		if ( employeeDao.exists( id ) ) {
@@ -103,8 +101,8 @@ public class EmployeeController {
 			message = "Employee with id " + id + " doesn't exists";
 		}
 
-		ModelAndView modelAndView = new ModelAndView( "redirect:/employee/list" );
-		modelAndView.addObject( "message", message );
-		return modelAndView;
+		redirectAttributes.addFlashAttribute( "message", message );
+		
+		return "redirect:/employee/list" ;
 	}
 }
