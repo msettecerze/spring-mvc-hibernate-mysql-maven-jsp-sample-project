@@ -1,13 +1,20 @@
 <decorators defaultdir="/WEB-INF/jsp/decorators">
 
-    <!--if some pages to be excluded from decoration-->
-    <excludes>
-        <!--<pattern>/dialog/</pattern>-->
-    </excludes>
+	<!--if some pages to be excluded from decoration -->
+	<excludes>
+		<!--<pattern>/dialog/</pattern> -->
+	</excludes>
 
-    <decorator name="master" page="master.jsp">
-          <pattern>/*</pattern>
-    </decorator>
+	<decorator name="employee" page="employee-decorator.jsp">
+		<!-- only for employee page -->
+		<pattern>/employee/*</pattern>
+		<pattern>/employee/</pattern>
+		<pattern>/employee</pattern>
+	</decorator>
 
+	<decorator name="xyz" page="xyz.jsp">
+		<!-- only for employee page -->
+		<pattern>/xyz/*</pattern>
+	</decorator>
 
 </decorators>
