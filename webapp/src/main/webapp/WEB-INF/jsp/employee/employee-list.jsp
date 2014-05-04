@@ -6,35 +6,38 @@
 
 <html>
 <body>
-	<div id="content">
-		${message} <br /> All Employees <br/>
-
-		<table>
-			<tr>
-				<th></th>
-				<th><fmt:message key="form.count"></fmt:message></th>
-				<th><fmt:message key="employee.form.id"></fmt:message></th>
-				<th><fmt:message key="employee.form.firstName"></fmt:message></th>
-				<th><fmt:message key="employee.form.lastName"></fmt:message></th>
-				<th><fmt:message key="employee.form.salary"></fmt:message></th>
-				<th>Action</th>
-			</tr>
-			<c:forEach var="employee" items="${employees}" varStatus="status">
+	${message}
+	<br />
+	<h1>All Employees</h1>
+	<br />
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
 				<tr>
-					<td><input type="checkbox"/></td>
-					<td><c:out value = "${status.count}"/></td>
-					<td>${employee.id}</td>
-					<td>${employee.firstName}</td>
-					<td>${employee.lastName}</td>
-					<td>${employee.salary}</td>
-					<td>
-						<a href = "<c:out value = "${pageContext.request.contextPath}/employee/edit/${employee.id}"/>"> Edit</a> 
-						<a href = "<c:out value = "${pageContext.request.contextPath}/employee/delete/${employee.id}"/>"> Delete</a> 
-					</td>
+					<th></th>
+					<th><fmt:message key="form.count"></fmt:message></th>
+					<th><fmt:message key="employee.form.id"></fmt:message></th>
+					<th><fmt:message key="employee.form.firstName"></fmt:message></th>
+					<th><fmt:message key="employee.form.lastName"></fmt:message></th>
+					<th><fmt:message key="employee.form.salary"></fmt:message></th>
+					<th>Action</th>
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody>
+				<c:forEach var="employee" items="${employees}" varStatus="status">
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td><c:out value="${status.count}" /></td>
+						<td>${employee.id}</td>
+						<td>${employee.firstName}</td>
+						<td>${employee.lastName}</td>
+						<td>${employee.salary}</td>
+						<td><a class="btn btn-default" href="<c:out value = "${pageContext.request.contextPath}/employee/edit/${employee.id}"/>"> Edit</a> <a class="btn btn-danger"
+							href="<c:out value = "${pageContext.request.contextPath}/employee/delete/${employee.id}"/>"> Delete</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
-
 	</div>
 </body>
 </html>

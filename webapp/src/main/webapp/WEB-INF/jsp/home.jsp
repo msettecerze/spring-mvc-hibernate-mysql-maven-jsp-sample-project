@@ -3,7 +3,7 @@
 <html>
 <body>
 	<div id="content">
-		${message} <br/>
+		${message} <br />
 		<fmt:message key="index.property_message" />
 	</div>
 </body>
