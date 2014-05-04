@@ -51,6 +51,10 @@ public class EmployeeController {
 
 		List< Employee > employees = employeeDao.findAll( );
 		modelAndView.addObject( "employees", employees );
+	
+		if(employees.size( )==0) {
+			modelAndView.addObject( "message", "No Record Exists" );
+		}
 
 		return modelAndView;
 	}
