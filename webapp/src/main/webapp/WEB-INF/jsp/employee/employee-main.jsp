@@ -3,6 +3,9 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <html>
+<head>
+<title>Hi</title>
+</head>
 <body>
 	<div class="jumbotron">
 		<h1>Welcome to Employee Manager</h1>

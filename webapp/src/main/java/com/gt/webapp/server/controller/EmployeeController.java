@@ -2,6 +2,8 @@ package com.gt.webapp.server.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +18,7 @@ import com.gt.webapp.server.entity.Employee;
 
 @Controller
 public class EmployeeController {
+	Logger				log	= LoggerFactory.getLogger( EmployeeController.class );
 
 	@Autowired
 	private EmployeeDAO	employeeDao;
@@ -25,6 +28,7 @@ public class EmployeeController {
 		ModelAndView mav = new ModelAndView( "employee/employee-main" );
 		mav.addObject( "message", "Welcome to Employee page" );
 
+		log.info( "home page served" );
 		return mav;
 	}
 
@@ -37,12 +41,12 @@ public class EmployeeController {
 
 	@RequestMapping( value = "/employee/add/process" )
 	public String addingEmployee( @ModelAttribute Employee employee, final RedirectAttributes redirectAttributes ) {
-		Long id= employeeDao.save( employee );
+		Long id = employeeDao.save( employee );
 		String message = "Employee saved successfully added. id = " + id;
- 
+
 		redirectAttributes.addFlashAttribute( "message", message );
-		
-		return "redirect:/employee/list" ;
+
+		return "redirect:/employee/list";
 	}
 
 	@RequestMapping( value = "/employee/list" )
@@ -51,8 +55,8 @@ public class EmployeeController {
 
 		List< Employee > employees = employeeDao.findAll( );
 		modelAndView.addObject( "employees", employees );
-	
-		if(employees.size( )==0) {
+
+		if ( employees.size( ) == 0 ) {
 			modelAndView.addObject( "message", "No Record Exists" );
 		}
 
@@ -73,6 +77,7 @@ public class EmployeeController {
 			employee = employeeDao.get( id );
 			modelAndView.addObject( "employee", employee );
 		} else {
+			log.error( "Employee with id {} doesn't exists... this is error", id );
 			message = "Employee with id " + id + " doesn't exists";
 			modelAndView.addObject( "message", message );
 
@@ -84,18 +89,18 @@ public class EmployeeController {
 	 * save after edit
 	 */
 	@RequestMapping( value = "/employee/edit/process", method = RequestMethod.POST )
-	public String edditingEmployee( @ModelAttribute Employee employee ,final RedirectAttributes redirectAttributes ) {
+	public String edditingEmployee( @ModelAttribute Employee employee, final RedirectAttributes redirectAttributes ) {
 
 		employeeDao.merge( employee );
 
 		String message = "Employee was successfully edited.";
 		redirectAttributes.addFlashAttribute( "message", message );
-		
-		return "redirect:/employee/list" ;
+
+		return "redirect:/employee/list";
 	}
 
 	@RequestMapping( value = "/employee/delete/{id}", method = RequestMethod.GET )
-	public String deleteEmployee( @PathVariable Long id, final RedirectAttributes redirectAttributes) {
+	public String deleteEmployee( @PathVariable Long id, final RedirectAttributes redirectAttributes ) {
 		String message = "";
 
 		if ( employeeDao.exists( id ) ) {
@@ -106,7 +111,7 @@ public class EmployeeController {
 		}
 
 		redirectAttributes.addFlashAttribute( "message", message );
-		
-		return "redirect:/employee/list" ;
+
+		return "redirect:/employee/list";
 	}
 }

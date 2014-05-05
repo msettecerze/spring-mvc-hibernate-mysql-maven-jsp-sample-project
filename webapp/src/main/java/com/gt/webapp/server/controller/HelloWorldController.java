@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gt.webapp.web.util.GTSpringException;
+
 /**
  * Simple index page controller serving hello.jsp file
  */
@@ -29,4 +31,20 @@ public class HelloWorldController {
 		return mav;
 	}
 
+	@RequestMapping( value = "/invalidXXXPage" )
+	public String pageNotFound( ) {
+		return "";
+	}
+
+	@RequestMapping( value = "/gt-error" )
+	public String gtErrorTest( ) throws Exception {
+
+		throw new GTSpringException( "ERROR CODE XYZ", "ERROR MESSAGE XYZ" );
+
+	}
+
+	@RequestMapping( value = "/genericException" )
+	public ModelAndView genericExceptionTest( ) throws Exception {
+		throw new Exception( "" );
+	}
 }

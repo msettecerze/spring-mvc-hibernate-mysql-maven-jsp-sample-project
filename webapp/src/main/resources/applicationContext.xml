@@ -64,5 +64,16 @@
             </props>
         </property>
     </bean>
+<!--  For Spring 2.x, we use SimpleMappingExceptionResolver in the XML file. -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.gt.webapp.web.util.GTSpringException">
+					pages/custom-error
+				</prop>
+				<prop key="java.lang.Exception">pages/generic-exception</prop>
+			</props>
+		</property>
+	</bean>
 
 </beans>
