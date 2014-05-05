@@ -8,7 +8,8 @@
 </head>
 <body>
 	<h1>Sorry! :(</h1>
-
+	<!-- <p>Class : ${name} - Error :  ${message}</p>  -->	
+	
 	<c:if test="${not empty exception.errCode}">
 		<h1>${exception.errCode}:SystemErrors</h1>
 	</c:if>

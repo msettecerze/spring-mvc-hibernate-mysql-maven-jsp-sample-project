@@ -45,6 +45,7 @@
 	<div class="navbar navbar-default navbar-fixed-bottom">
 		<div class="container">
 			<p class="navbar-text pull-left">Footer Text</p>
+			<p class="navbar-text">Language : <a href="?lang=en">English</a>|<a href="?lang=fr">Nepali</a> </p>
 			<a href="#" class="navbar-btn btn-danger btn pull-right">Visit us at</a>
 		</div>
 	</div>

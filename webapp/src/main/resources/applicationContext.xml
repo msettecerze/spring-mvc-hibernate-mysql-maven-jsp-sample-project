@@ -76,4 +76,26 @@
 		</property>
 	</bean>
 
+	<!-- Localization L10N -->
+	<bean id="localeResolver" class="com.gt.webapp.web.util.GTSessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+	
+	<!--COOKIE based localeResolver-->
+	<!-- 
+	<bean id="localeResolverX" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en" />
+		<property name="cookieName" value="myAppLocaleCookie"></property>
+		<property name="cookieMaxAge" value="3600"></property>
+	</bean>
+ 	-->
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="lang" />
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

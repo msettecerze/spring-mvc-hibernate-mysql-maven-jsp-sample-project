@@ -9,7 +9,8 @@
 <body>
 	<h1>Sorry! :(</h1>
 	<h3>Generic Exception :</h3>
-	<p>${exception.message}</p>
+	<!-- <p>Class : ${name} - Error :  ${message}</p>  -->	
+	
 	<c:forEach items="${exception.stackTrace}" var="element">
 		<c:out value="${element}" />
 	</c:forEach>

@@ -1,6 +1,6 @@
 package com.gt.webapp.web.util;
 
-public class GTSpringException extends Exception {
+public class GTSpringException extends RuntimeException {
 	// public class GTSpringException extends RuntimeException {
 	private static final long	serialVersionUID	= 1L;
 
